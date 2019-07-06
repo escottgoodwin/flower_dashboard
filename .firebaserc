@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "quandrio-ee823"
+  },
+  "targets": {
+    "quandrio-ee823": {
+      "hosting": {
+        "flower-dashboard": [
+          "flower-dashboard"
+        ],
+        "flower_dashboard": [
+          "flower_dashboard"
+        ]
+      }
+    }
+  }
+}

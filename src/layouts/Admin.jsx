@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -10,7 +10,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Navbar from "components/Navbars/Navbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 import CustomerProfile from "components/CustomerProfile";
 import ProductProfile from "components/ProductProfile";
 import SalesmanProfile from "components/SalesmanProfile";
@@ -21,14 +20,18 @@ import CustomerAddProfile from "components/CustomerAddProfile";
 import SalesmanAddProfile from "components/SalesmanAddProfile";
 import ProductAddProfile from "components/ProductAddProfile";
 
+import fire from '../firebase'
+
 import routes from "routes.js";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/layouts/dashboardStyle.jsx";
 
-import image from "assets/img/sidebar-2.jpg";
+import image from "assets/img/flower-field3.jpg";
 import logo from "assets/img/flower_2.png";
 
 let ps;
+
+
 
 const switchRoutes = (
   <Switch>
@@ -89,9 +92,6 @@ const switchRoutes = (
       component={ProductAddProfile}
     />
 
-
-
-  //  <Redirect from="/admin" to="/admin/dashboard" />
   </Switch>
 );
 
@@ -101,7 +101,8 @@ class Dashboard extends React.Component {
     color: "blue",
     hasImage: true,
     fixedClasses: "dropdown show",
-    mobileOpen: false
+    mobileOpen: false,
+    userName:''
   };
   mainPanel = React.createRef();
   handleImageClick = image => {
@@ -128,11 +129,27 @@ class Dashboard extends React.Component {
       this.setState({ mobileOpen: false });
     }
   };
+
+  notSignedIn = () => {
+       this.props.history.push(`/login`)
+   }
+
   componentDidMount() {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(this.mainPanel.current);
     }
     window.addEventListener("resize", this.resizeFunction);
+
+    fire.auth().onAuthStateChanged(user =>  {
+      if (user) {
+          this.setState({
+            userName:user.displayName,
+          })
+      } else {
+        this.setState({name:'No user'})
+        this.notSignedIn()
+      }
+    });
   }
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
@@ -155,6 +172,7 @@ class Dashboard extends React.Component {
         <Sidebar
           routes={routes}
           logoText={"Flower Shop"}
+          userName={this.state.userName}
           logo={logo}
           image={this.state.image}
           handleDrawerToggle={this.handleDrawerToggle}

@@ -26,15 +26,37 @@ const db = fire.firestore()
 
 function chartSeries(products){
   const names = products.map(p => p.name)
-
   const inventory = products.map(p => p.inventory)
-
   const max = inventory.reduce(function(a, b) {
     return Math.max(a, b);
     });
 
-  return { labels:names, series:[inventory], max }
+  return { labels:names, series:inventory, max }
 }
+
+var responsiveOptions = [
+  ['screen and (min-width: 640px)', {
+    chartPadding: 10,
+    labelOffset: 10,
+    labelDirection: 'explode',
+    labelInterpolationFnc: function(value) {
+      return value;
+    }
+  }],
+  ['screen and (min-width: 1024px)', {
+    labelOffset: 40,
+    chartPadding: 5
+  }]
+];
+
+
+
+var options = {
+  labelInterpolationFnc: function(value) {
+    return value[0]
+  }
+};
+
 
 
 class InventoryTypeChart extends React.Component {
@@ -64,6 +86,7 @@ class InventoryTypeChart extends React.Component {
     });
 
     const data = chartSeries(products)
+
     this.setState({data})
 
   })
@@ -101,33 +124,17 @@ class InventoryTypeChart extends React.Component {
   render() {
     const { classes } = this.props;
     const { data } = this.state
-
-    const options={
-      lineSmooth: Chartist.Interpolation.cardinal({
-        tension: 0
-      }),
-      low: 0,
-      high: data.max*1.2, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-      chartPadding: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0
-      }
-    }
-
+    console.log(data)
     return (
 
       <Card chart>
         <CardHeader color="warning">
-          <ChartistGraph
-            className="ct-chart"
-            data={data}
-            type="Bar"
-            options={options}
-            responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-            listener={emailsSubscriptionChart.animation}
-          />
+        <ChartistGraph
+          data={data}
+          type="Pie"
+          options={options}
+          responsiveOptions={responsiveOptions}
+        />
         </CardHeader>
         <CardBody>
           <h4 className={classes.cardTitle}>Inventory - Flower Type</h4>

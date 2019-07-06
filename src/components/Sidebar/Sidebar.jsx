@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Drawer from "@material-ui/core/Drawer";
+import Button from "components/CustomButtons/Button.jsx";
 import Hidden from "@material-ui/core/Hidden";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -22,7 +23,7 @@ const Sidebar = ({ ...props }) => {
   function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   }
-  const { classes, color, logo, image, logoText, routes } = props;
+  const { classes, color, logo, image, logoText, routes, userName } = props;
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
@@ -78,6 +79,7 @@ const Sidebar = ({ ...props }) => {
     </List>
   );
   var brand = (
+    <>
     <div className={classes.logo}>
       <a
         href="https://www.creative-tim.com?ref=mdr-sidebar"
@@ -92,6 +94,10 @@ const Sidebar = ({ ...props }) => {
         {logoText}
       </a>
     </div>
+    <div style={{color:'white'}}className={classes.logo}>
+      Welcome {userName}
+    </div>
+    </>
   );
   return (
     <div>
@@ -115,6 +121,8 @@ const Sidebar = ({ ...props }) => {
             {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
             {links}
           </div>
+
+
           {image !== undefined ? (
             <div
               className={classes.background}
@@ -135,6 +143,7 @@ const Sidebar = ({ ...props }) => {
           }}
         >
           {brand}
+        
           <div className={classes.sidebarWrapper}>{links}</div>
           {image !== undefined ? (
             <div

@@ -4,8 +4,6 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
-  MarkerWithLabel,
-  InfoWindow
 } from "react-google-maps";
 
 const CustomSkinMap = withScriptjs(

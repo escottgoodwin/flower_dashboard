@@ -8,7 +8,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import TextField from '@material-ui/core/TextField';
 import Card from "components/Card/Card.jsx";
@@ -16,10 +15,6 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-import SalesmanSalesList from "components/SalesmanSalesList";
-
-
-import avatar from "assets/img/faces/marc.jpg";
 
 import fire from '../firebase'
 const database = fire.firestore()
@@ -87,7 +82,7 @@ class SalesmanUpdateProfile extends Component {
 }
 
 updateProfile = () => {
-  const { name, office, userImg, title, phone, email, notes, docId } = this.state;
+  const { name, office, userImg, title, phone, docId } = this.state;
   const { salesmanId } = this.props.location.state
 
   database.collection('users')
@@ -115,7 +110,7 @@ this.props.history.push({
   render() {
   const { classes } = this.props;
   const { salesmanId } = this.props.location.state
-  const { name, office, userImg, title, phone, email, notes, docId } = this.state;
+  const { name, office, userImg, title, phone, email, notes} = this.state;
 
   return (
     <div>

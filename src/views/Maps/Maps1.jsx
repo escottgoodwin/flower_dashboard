@@ -1,8 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import fire from '../../firebase'
-
-
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 
 const mapStyles = {
@@ -33,7 +30,7 @@ var key = typeof criteria === 'function' ? criteria(item) : item[criteria];
 };
 
 function personSalesList1(arr){
-    let custs = []
+    let customers = []
     for (const [ key, value ] of Object.entries(arr)) {
       const number = value.map(c => c.price).length
       const customerId = value.map(c => c.customerId)[0]
@@ -42,17 +39,16 @@ function personSalesList1(arr){
       const sales = value.map(p => parseFloat(p.price)).reduce((a,b) => a + b, 0)
 
       let item = {customerId:customerId, name:key, customerLat:customerLat, customerLong:customerLong, sales:sales, number:number,msg: key + ' - $' + sales}
-      custs.push(item)
+      customers.push(item)
     }
 
-    return custs
+    return customers
 }
 
 class Map1 extends Component {
 
     state = {
       showingInfoWindow: false,
-      custs:[],
       customers:[],
       activeMarker: {},
       selectedPlace: {},
@@ -101,10 +97,10 @@ class Map1 extends Component {
       });
 
       const groupedCust = groupBy(sales,'customer')
-      const custs = personSalesList1(groupedCust)
+      const customers = personSalesList1(groupedCust)
 
       this.setState({
-        custs
+        customers
       });
     })
     .catch((err) => {
@@ -138,10 +134,10 @@ class Map1 extends Component {
         });
 
         const groupedCust = groupBy(sales,'customer')
-        const custs = personSalesList1(groupedCust)
+        const customers = personSalesList1(groupedCust)
 
         this.setState({
-          custs
+          customers
         });
 
       });
@@ -166,8 +162,8 @@ class Map1 extends Component {
 
   render() {
 
-    const { custs, customers } = this.state
-    console.log(custs)
+    const { customers } = this.state
+
       return (
 
           <Map
@@ -178,7 +174,7 @@ class Map1 extends Component {
             onClick={this.onMapClicked}
           >
 
-          {custs.map((store, index) =>
+          {customers.map((store, index) =>
 
             <Marker key={index} id={index}
             position={{

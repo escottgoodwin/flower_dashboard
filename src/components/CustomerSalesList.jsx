@@ -15,8 +15,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 // core components
-import tableStyle from "assets/jss/material-dashboard-react/components/tableStyle.jsx";
-
 import fire from '../firebase'
 
 const styles = {
@@ -149,7 +147,7 @@ class CustomerSalesList extends Component {
 
   render(){
       const { classes  } = this.props;
-      const { data, sales, totalNum, totalValue } = this.state
+      const { sales, totalNum, totalValue } = this.state
       const tableHeaderColor = 'success'
   return (
     <GridContainer>

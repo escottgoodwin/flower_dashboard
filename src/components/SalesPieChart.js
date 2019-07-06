@@ -47,20 +47,38 @@ var key = typeof criteria === 'function' ? criteria(item) : item[criteria];
 
 function chartSeries(grouped,column){
   const values = Object.values(grouped)
-  const valueSeries = values.map(v => v.map(s => parseFloat(s[column])).reduce((a,b) => a + b, 0))
 
-  const max = valueSeries.reduce(function(a, b) {
-    return Math.max(a, b);
-    });
+  const valueSeries = values.map(v => v.map(s => parseFloat(s[column])).reduce((a,b) => a + b, 0))
+  const total = valueSeries.reduce((a,b) => a + b, 0)
+
   return {
     labels:Object.keys(grouped),
-    series:[valueSeries],
-    max:max
+    series:valueSeries,
   }
 }
 
+var responsiveOptions = [
+  ['screen and (min-width: 640px)', {
+    chartPadding: 10,
+    labelOffset: 10,
+    labelDirection: 'explode',
+    labelInterpolationFnc: function(value) {
+      return value;
+    }
+  }],
+  ['screen and (min-width: 1024px)', {
+    labelOffset: 40,
+    chartPadding: 5
+  }]
+];
 
 
+
+var options = {
+  labelInterpolationFnc: function(value) {
+    return value[0]
+  }
+};
 
 class SalesTypeChart extends React.Component {
   state = {
@@ -102,6 +120,7 @@ class SalesTypeChart extends React.Component {
       data:productGroup
 
     });
+
   })
   .catch((err) => {
     console.log('Error getting documents', err);
@@ -146,21 +165,7 @@ class SalesTypeChart extends React.Component {
   render() {
     const { classes } = this.props;
     const { data } = this.state
-
-    const options={
-      lineSmooth: Chartist.Interpolation.cardinal({
-        tension: 0
-      }),
-      low: 0,
-      high: data.max*1.2, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-      chartPadding: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0
-      }
-    }
-
+    console.log(data)
     return (
 
       <Card chart>
@@ -168,10 +173,9 @@ class SalesTypeChart extends React.Component {
           <ChartistGraph
             className="ct-chart"
             data={data}
-            type="Bar"
+            type="Pie"
             options={options}
-            responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-            listener={emailsSubscriptionChart.animation}
+            responsiveOptions={responsiveOptions}
           />
         </CardHeader>
         <CardBody>

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {withRouter} from 'react-router-dom'
-import { Link } from "react-router-dom";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // @material-ui/core components
@@ -9,7 +8,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import TextField from '@material-ui/core/TextField';
 import Card from "components/Card/Card.jsx";
@@ -17,10 +15,6 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-import SalesmanSalesList from "components/SalesmanSalesList";
-
-
-import avatar from "assets/img/faces/marc.jpg";
 
 import fire from '../firebase'
 const db = fire.firestore()
@@ -64,7 +58,7 @@ class SalesmanAddProfile extends Component {
 }
 
 updateProfile = () => {
-  const { name, office, userImg, title, phone, email, notes } = this.state;
+  const { name, office, userImg, title, phone, email } = this.state;
 
   db.collection("users").add({
   name:name,
@@ -87,7 +81,6 @@ this.props.history.push(`dashboard`)
 
   render() {
   const { classes } = this.props;
-  const { salesmanId } = this.props.location.state
   const { name, office, userImg, title, phone, email, notes } = this.state;
 
   return (
@@ -199,7 +192,7 @@ this.props.history.push(`dashboard`)
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card profile>
-          {userImg.length>0 && 
+          {userImg.length>0 &&
             <CardAvatar profile>
               <a href="#pablo" onClick={e => e.preventDefault()}>
                 <img src={userImg} alt="..." />

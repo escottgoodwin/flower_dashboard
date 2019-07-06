@@ -1,6 +1,7 @@
 import React from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
+import {withRouter} from 'react-router-dom'
 import classNames from "classnames";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -20,6 +21,8 @@ import Search from "@material-ui/icons/Search";
 // core components
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
+
+import firebase from 'firebase'
 
 import headerLinksStyle from "assets/jss/material-dashboard-react/components/headerLinksStyle.jsx";
 
@@ -46,6 +49,18 @@ class AdminNavbarLinks extends React.Component {
     }
     this.setState({ openProfile: false });
   };
+
+  signOut = (props) => {
+    firebase.auth().signOut().then(function() {
+
+      console.log('signed out')
+
+    }).catch(function(error) {
+      console.log(error)
+    });
+    this.props.history.push(`/login`)
+  }
+
   render() {
     const { classes } = this.props;
     const { openNotifcation, openProfile } = this.state;
@@ -215,7 +230,7 @@ class AdminNavbarLinks extends React.Component {
                       </MenuItem>
                       <Divider light />
                       <MenuItem
-                        onClick={this.handleCloseProfile}
+                        onClick={this.signOut}
                         className={classes.dropdownItem}
                       >
                         Logout
@@ -236,4 +251,4 @@ AdminNavbarLinks.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(headerLinksStyle)(AdminNavbarLinks);
+export default withStyles(headerLinksStyle)(withRouter(AdminNavbarLinks));

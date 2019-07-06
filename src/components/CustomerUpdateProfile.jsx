@@ -8,17 +8,12 @@ import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-import CustomerSalesList from "components/CustomerSalesList";
-
-
-import avatar from "assets/img/faces/marc.jpg";
 
 import fire from '../firebase'
 const database = fire.firestore()
@@ -56,12 +51,8 @@ class CustomerUpdateProfile extends Component {
 
   componentDidMount(){
 
-  //const { productName } = this.props.location.state
-  // Initial call for flowers list
-  const productId1 = 'PjPqfU4y3qXakyodZI0Y'
-
   const { customerId } = this.props.location.state
-  console.log('id',customerId)
+  
   database.collection('customers').doc(customerId)
   .get().then(doc => {
     if (doc.exists) {

@@ -260,9 +260,11 @@ class Maps extends Component {
 
   render(){
     const { sales, position } = this.state
+    const gkey = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAP_KEY}`
+
   return (
     <CustomSkinMap
-      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyLUwGFi9V44ALq6o68gxAfwR-m8OA_X4"
+      googleMapURL={gkey}
       loadingElement={<div style={{ height: `100%` }} />}
       containerElement={<div style={{ height: `100vh` }} />}
       mapElement={<div style={{ height: `100%` }} />}

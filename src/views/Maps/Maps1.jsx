@@ -163,6 +163,7 @@ class Map1 extends Component {
   render() {
 
     const { customers } = this.state
+    const gkey = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAP_KEY}`
 
       return (
 
@@ -204,5 +205,5 @@ class Map1 extends Component {
   }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDyLUwGFi9V44ALq6o68gxAfwR-m8OA_X4'
+  apiKey: gkey
 })(Map1);

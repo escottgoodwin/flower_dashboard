@@ -151,6 +151,7 @@ class Dashboard extends React.Component {
       }
     });
   }
+
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
       this.mainPanel.current.scrollTop = 0;

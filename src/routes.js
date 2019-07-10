@@ -6,7 +6,7 @@ import DashboardPage from "views/Dashboard/Dashboard.jsx";
 import SalesList from "components/SalesList.jsx";
 import DashboardCalendar from "components/Calendar";
 import ProductList from "components/ProductList1";
-import Maps1 from "views/Maps/Maps1.jsx";
+import Maps from "views/Maps/Maps.jsx";
 
 const dashboardRoutes = [
   {
@@ -38,7 +38,7 @@ const dashboardRoutes = [
     name: "Sales Maps",
     rtlName: "خرائط",
     icon: LocationOn,
-    component: Maps1,
+    component: Maps,
     layout: "/admin"
   },
   ,

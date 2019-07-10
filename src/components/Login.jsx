@@ -157,12 +157,18 @@ emailSignIn = (props) => {
 
 
   render(){
-
+      const bkImg = 'https://y6auj24xr4y3qq95tz7io6uu-wpengine.netdna-ssl.com/wp-content/uploads/2016/05/DSC_0937-1400x937.jpg'
       const { classes } = this.props;
       const { email, password, showPassword, showError, errorMessage } = this.state
 
   return (
-    <div style={{heigh:'100vh',backgroundColor:'#36454f', paddingRight:'30%',paddingLeft:'30%',paddingTop:'10%',paddingBottom:'10%'}} >
+    <div style={{
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundImage: `url(${bkImg })`}} >
+
+  <div style={{paddingRight:'30%',paddingLeft:'30%',paddingTop:'10%',paddingBottom:'10%'}} >
 
     {showError && <SnackbarContent message={errorMessage} icon={AddAlert} close color="danger"/>}
 
@@ -257,6 +263,8 @@ emailSignIn = (props) => {
     </GridContainer>
     </div>
     </center>
+
+    </div>
     </div>
   );
 }

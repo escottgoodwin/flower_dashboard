@@ -94,7 +94,7 @@ const Sidebar = ({ ...props }) => {
         {logoText}
       </a>
     </div>
-    <div style={{color:'white'}}className={classes.logo}>
+    <div style={{color:'white'}} className={classes.logo}>
       Welcome {userName}
     </div>
     </>
@@ -143,7 +143,7 @@ const Sidebar = ({ ...props }) => {
           }}
         >
           {brand}
-        
+
           <div className={classes.sidebarWrapper}>{links}</div>
           {image !== undefined ? (
             <div

@@ -57,7 +57,7 @@ class SalesmanAddProfile extends Component {
 
 }
 
-updateProfile = () => {
+addProfile = () => {
   const { name, office, userImg, title, phone, email } = this.state;
 
   db.collection("users").add({
@@ -184,7 +184,7 @@ this.props.history.push(`dashboard`)
           </CardBody>
           <CardFooter>
             <Button
-            onClick={this.updateProfile}
+            onClick={this.addProfile}
             color="success">Add Profile</Button>
           </CardFooter>
         </Card>

@@ -90,8 +90,8 @@ this.props.history.push(`dashboard`)
 
         <Card>
           <CardHeader color="success">
-            <h4 className={classes.cardTitleWhite}>Edit Salesman Profile</h4>
-            <p className={classes.cardCategoryWhite}>Update your profile</p>
+            <h4 className={classes.cardTitleWhite}>Add Salesman Profile</h4>
+            <p className={classes.cardCategoryWhite}>Profile</p>
           </CardHeader>
           <CardBody>
             <GridContainer>

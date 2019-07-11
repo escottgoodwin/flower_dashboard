@@ -122,8 +122,8 @@ class CustomerUpdateProfile extends Component {
 
         <Card>
           <CardHeader color="info">
-            <h4 className={classes.cardTitleWhite}>Add Customer</h4>
-            <p className={classes.cardCategoryWhite}>Add profile</p>
+            <h4 className={classes.cardTitleWhite}>Update Customer</h4>
+            <p className={classes.cardCategoryWhite}>update profile</p>
           </CardHeader>
           <CardBody>
             <GridContainer>

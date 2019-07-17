@@ -38,45 +38,51 @@ const styles = {
   }
 };
 
-class CustomerAddProfile extends Component {
+class LeadAdd extends Component {
 
   state ={
     address:'',
     city:'',
     name:'',
     state:'',
-    type:'',
+    company:'',
     phone:'',
     email:'',
-    customerImg:''
+    leadImg:''
     }
 
-    addCustomer = () => {
+    addLead = () => {
 
-      const { address, city, name, state, customerImg,type, phone, email } = this.state;
+      const { address, city, name, state, leadImg, company, phone, email } = this.state;
 
-      db.collection("customers").add({
-      address:address,
-      city:city,
-      name:name,
-      state:state,
-      customerImg:customerImg,
-      type:type,
-      phone:phone,
-      email:email
-      })
+      const now = new Date()
+
+      db.collection("leads").add({
+        address:address,
+        city:city,
+        name:name,
+        state:state,
+        leadImg:leadImg,
+        company:company,
+        phone:phone,
+        email:email,
+        phase:'new',
+        newPhaseDate:now,
+        callPhaseDate:null,
+        closePhaseDate:null
+        })
       .then(function(docRef) {
           console.log("Document written with ID: ", docRef.id);
       })
       .catch(function(error) {
           console.error("Error adding document: ", error);
       });
-      this.props.history.push(`dashboard`)
+      this.props.history.push(`/admin/leads`)
     }
 
   render() {
   const { classes } = this.props;
-  const { address, city, name, state, customerImg,type, phone, email, notes } = this.state;
+  const { address, city, name, state, leadImg, company, phone, email, notes } = this.state;
 
   return (
     <div>
@@ -84,8 +90,8 @@ class CustomerAddProfile extends Component {
         <GridItem xs={12} sm={12} md={8}>
 
         <Card>
-          <CardHeader color="info">
-            <h4 className={classes.cardTitleWhite}>Add Customer</h4>
+          <CardHeader color="success">
+            <h4 className={classes.cardTitleWhite}>Add Lead</h4>
             <p className={classes.cardCategoryWhite}>Add profile</p>
           </CardHeader>
           <CardBody>
@@ -106,13 +112,12 @@ class CustomerAddProfile extends Component {
 
               <TextField
                   id="outlined-full-width"
-                  label="Business Type"
+                  label="Company"
                   fullWidth
-                  value={type}
-                  onChange={e => this.setState({ type: e.target.value })}
+                  value={company}
+                  onChange={e => this.setState({ company: e.target.value })}
                   margin="normal"
                 />
-
 
               </GridItem>
             </GridContainer>
@@ -189,8 +194,8 @@ class CustomerAddProfile extends Component {
                     id="outlined-full-width"
                     label="Image"
                     fullWidth
-                    value={customerImg}
-                    onChange={e => this.setState({ customerImg: e.target.value })}
+                    value={leadImg}
+                    onChange={e => this.setState({ leadImg: e.target.value })}
                     margin="normal"
                   />
 
@@ -216,23 +221,23 @@ class CustomerAddProfile extends Component {
           </CardBody>
           <CardFooter>
             <Button
-            onClick={this.addCustomer}
-            color="info">Add Profile</Button>
+            onClick={this.addLead}
+            color="success">Add Lead</Button>
           </CardFooter>
         </Card>
 
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card profile>
-          {customerImg.length>0 &&
+          {leadImg.length>0 &&
             <CardAvatar profile>
               <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={customerImg} alt="..." />
+                <img src={leadImg} alt="..." />
               </a>
             </CardAvatar>
            }
             <CardBody profile>
-              <h5 className={classes.cardCategory}>{type}</h5>
+              <h5 className={classes.cardCategory}>{company}</h5>
               <h3 className={classes.cardTitle}>{name}</h3>
               <p className={classes.description}>
                 {address}
@@ -258,8 +263,8 @@ class CustomerAddProfile extends Component {
  }
 }
 
-CustomerAddProfile.propTypes = {
+LeadAdd.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(styles)(withRouter(CustomerAddProfile));
+export default withStyles(styles)(withRouter(LeadAdd));

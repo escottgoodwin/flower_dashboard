@@ -13,14 +13,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
-
-import {
-  emailsSubscriptionChart,
-} from "variables/charts.jsx";
-
 import fire from '../firebase'
-
-var Chartist = require("chartist");
 
 const db = fire.firestore()
 
@@ -49,7 +42,6 @@ function chartSeries(grouped,column){
   const values = Object.values(grouped)
 
   const valueSeries = values.map(v => v.map(s => parseFloat(s[column])).reduce((a,b) => a + b, 0))
-  const total = valueSeries.reduce((a,b) => a + b, 0)
 
   return {
     labels:Object.keys(grouped),
@@ -165,7 +157,6 @@ class SalesTypeChart extends React.Component {
   render() {
     const { classes } = this.props;
     const { data } = this.state
-    console.log(data)
     return (
 
       <Card chart>

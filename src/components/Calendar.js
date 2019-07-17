@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
+import { Calendar, momentLocalizer } from 'react-big-calendar'
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from 'moment'
@@ -8,7 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
-import InputLabel from "@material-ui/core/InputLabel";
 import Modal from '@material-ui/core/Modal';
 
 
@@ -16,14 +15,10 @@ import Modal from '@material-ui/core/Modal';
 // to the correct localizer.
 import fire from '../firebase'
 
-const mapStyles = {
-  width: '100%',
-  height: '100%',
-};
 const localizer = momentLocalizer(moment)
 const db = fire.firestore()
 
-class DashboardCalendar extends React.Component {
+class DashboardCalendar extends Component {
 
   state = {
     events:[],
@@ -62,9 +57,6 @@ class DashboardCalendar extends React.Component {
     startTime:addEventStart,
     endTime:addEventEnd
     })
-    .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-    })
     .catch(function(error) {
         console.error("Error adding document: ", error);
     });
@@ -85,7 +77,6 @@ class DashboardCalendar extends React.Component {
       addEventStart:start,
       addEventEnd:end,
     }));
-    const { addEventStart, addEventEnd} = this.state
 
    }
 
@@ -155,7 +146,7 @@ class DashboardCalendar extends React.Component {
         selectable
         localizer={localizer}
         views={['month', 'day', 'week','agenda']}
-        events={this.state.events}
+        events={events}
         defaultView='month'
         scrollToTime={new Date(1970, 1, 1, 6)}
         defaultDate={new Date()}
@@ -189,8 +180,6 @@ class DashboardCalendar extends React.Component {
         </div>
         </Paper>
       </Modal>
-
-
 
       <Modal
         aria-labelledby="simple-modal-title"

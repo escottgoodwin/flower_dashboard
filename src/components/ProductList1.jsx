@@ -16,8 +16,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-// core components
-import tableStyle from "assets/jss/material-dashboard-react/components/tableStyle.jsx";
 
 import fire from '../firebase'
 
@@ -113,13 +111,11 @@ class ProductList extends Component {
       });
 
       });
-
-
 }
 
   render(){
       const { classes } = this.props;
-      const { data, products } = this.state
+      const { products } = this.state
       const tableHeaderColor='success'
 
   return (

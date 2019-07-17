@@ -19,6 +19,7 @@ import ProductUpdateProfile from "components/ProductUpdateProfile";
 import CustomerAddProfile from "components/CustomerAddProfile";
 import SalesmanAddProfile from "components/SalesmanAddProfile";
 import ProductAddProfile from "components/ProductAddProfile";
+import LeadAdd from "components/LeadAdd";
 
 import fire from '../firebase'
 
@@ -91,6 +92,13 @@ const switchRoutes = (
       path='/admin/add_product'
       component={ProductAddProfile}
     />
+
+    <Route
+      path='/admin/add_lead'
+      component={LeadAdd}
+    />
+
+
 
   </Switch>
 );

@@ -5,8 +5,6 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 import Store from "@material-ui/icons/Store";
-import DateRange from "@material-ui/icons/DateRange";
-// core components
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardIcon from "components/Card/CardIcon.jsx";

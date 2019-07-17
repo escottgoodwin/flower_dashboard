@@ -51,9 +51,8 @@ class AdminNavbarLinks extends React.Component {
   };
 
   signOut = (props) => {
-    firebase.auth().signOut().then(function() {
-
-      console.log('signed out')
+    firebase.auth().signOut()
+    .then(function() {
 
     }).catch(function(error) {
       console.log(error)

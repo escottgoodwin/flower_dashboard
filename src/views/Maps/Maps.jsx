@@ -8,7 +8,7 @@ import {
 } from "react-google-maps";
 
 import fire from '../../firebase'
-import logo from "assets/img/flower_2.png";
+
 const db = fire.firestore()
 
 
@@ -212,7 +212,7 @@ class Maps extends Component {
 
       const groupedCust = groupBy(sales,'customer')
       const customers = personSalesList1(groupedCust)
-      console.log(customers)
+
       this.setState({
         sales:customers
       });
@@ -249,7 +249,7 @@ class Maps extends Component {
 
         const groupedCust = groupBy(sales,'customer')
         const customers = personSalesList1(groupedCust)
-        console.log(customers)
+        
         this.setState({
           sales:customers
         });

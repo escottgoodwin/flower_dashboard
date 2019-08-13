@@ -139,9 +139,7 @@ class SalesTimeChart extends React.Component {
         </CardHeader>
         <CardBody>
           <h4 className={classes.cardTitle}>Completed Tasks</h4>
-          <p className={classes.cardCategory}>
-            Last Campaign Performance
-          </p>
+        
         </CardBody>
         <CardFooter chart>
           <div className={classes.stats}>

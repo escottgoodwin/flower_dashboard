@@ -134,7 +134,7 @@ class SignUp extends Component {
 emailSignUp = (props) => {
   const { email, password } = this.state
 
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  firebase.auth().createUserWithEmailAndPassword(email, password)
   .then(function(result) {
   // This gives you a Facebook Access Token. You can use it to access the Facebook API.
 
@@ -176,11 +176,11 @@ emailSignUp = (props) => {
           <div>  <h4 className={classes.cardTitleWhite}>Flower Shop Sign Up</h4></div>
             <div>
 
-            <IconButton onClick={() => this.googleSignIn(this.props)}>  <Google /> </IconButton>
+            <IconButton >  <Google /> </IconButton>
 
-            <IconButton onClick={() => this.twitterSignIn(this.props)}>  <Twitter /> </IconButton>
+            <IconButton >  <Twitter /> </IconButton>
 
-            <IconButton onClick={() => this.facebookSignIn(this.props)}>
+            <IconButton >
             <img src="https://img.icons8.com/material/24/000000/facebook-f.png" alt='facebook logo'/>
             </IconButton>
             </div>

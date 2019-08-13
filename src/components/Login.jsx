@@ -11,7 +11,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import AddAlert from "@material-ui/icons/AddAlert";
 //core components
 import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
-
+import Snackbar from "components/Snackbar/Snackbar.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import TextField from '@material-ui/core/TextField';
@@ -29,7 +29,7 @@ import { Google, Twitter } from 'mdi-material-ui'
 import fire from '../firebase'
 
 import logo from "assets/img/flower_2.png";
-
+import bkImg from "assets/img/flower-field-3.jpg";
 
 var google = new firebase.auth.GoogleAuthProvider();
 
@@ -76,12 +76,8 @@ class Login extends Component {
     password:'',
     showPassword: false,
     showError:false,
-    errorMessage:''
-  }
-  componentDidMount(){
-
-  // Initial call for sales list
-
+    errorMessage:'',
+    open:false
   }
 
   handleClickShowPassword = () => {
@@ -93,15 +89,15 @@ class Login extends Component {
     fire.auth().signInWithPopup(google).then(function(result) {
   // This gives you a Facebook Access Token. You can use it to access the Facebook API.
 
-  props.history.push(`/admin/dashboard`)
+      props.history.push(`/admin/dashboard`)
 
-  // ...
-}).catch(function(error) {
-  // Handle Errors here.
-  var errorMessage = error.message;
-  this.setState({errorMessage,showError:true})
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      var errorMessage = error.message;
+      this.setState({errorMessage,open:true})
 
-});
+    });
 
   }
 
@@ -112,10 +108,10 @@ class Login extends Component {
   props.history.push(`/admin/dashboard`)
 
   // ...
-}).catch(function(error) {
+}).catch((error) => {
   // Handle Errors here.
   var errorMessage = error.message;
-  this.setState({errorMessage,showError:true})
+  this.setState({errorMessage,open:true})
   // ...
 });
 
@@ -128,10 +124,10 @@ class Login extends Component {
   props.history.push(`/admin/dashboard`)
 
   // ...
-}).catch(function(error) {
+}).catch((error) => {
   // Handle Errors here.
   var errorMessage = error.message;
-  this.setState({errorMessage,showError:true})
+  this.setState({errorMessage,open:true})
   // ...
 });
 }
@@ -141,39 +137,35 @@ emailSignIn = (props) => {
 
   firebase.auth().signInWithEmailAndPassword(email, password)
   .then(function(result) {
-  // This gives you a Facebook Access Token. You can use it to access the Facebook API.
 
   props.history.push(`/admin/dashboard`)
 
   // ...
-  }).catch(function(error) {
+  }).catch((error) => {
   // Handle Errors here.
   var errorMessage = error.message;
-  this.setState({errorMessage,showError:true})
+
+  this.setState({errorMessage,open:true})
   // ...
   });
 
 }
 
-
   render(){
-      const bkImg = 'https://y6auj24xr4y3qq95tz7io6uu-wpengine.netdna-ssl.com/wp-content/uploads/2016/05/DSC_0937-1400x937.jpg'
       const { classes } = this.props;
-      const { email, password, showPassword, showError, errorMessage } = this.state
+      const { email, password, showPassword, showError, errorMessage, open } = this.state
 
   return (
-    <div style={{
+  <div style={{
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundImage: `url(${bkImg })`}} >
+    backgroundColor:'#36454f'}} >
 
-  <div style={{paddingRight:'30%',paddingLeft:'30%',paddingTop:'10%',paddingBottom:'10%'}} >
-
-    {showError && <SnackbarContent message={errorMessage} icon={AddAlert} close color="danger"/>}
+    <div style={{paddingRight:'30%',paddingLeft:'30%',paddingTop:'10%',paddingBottom:'10%'}} >
 
     <center>
-    <div >
+
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
 
@@ -187,11 +179,11 @@ emailSignIn = (props) => {
           <div>  <h4 className={classes.cardTitleWhite}>Flower Shop Login</h4></div>
             <div>
 
-            <IconButton onClick={() => this.googleSignIn(this.props)}>  <Google /> </IconButton>
+            <IconButton >  <Google /> </IconButton>
 
-            <IconButton onClick={() => this.twitterSignIn(this.props)}>  <Twitter /> </IconButton>
+            <IconButton >  <Twitter /> </IconButton>
 
-            <IconButton onClick={() => this.facebookSignIn(this.props)}>
+            <IconButton >
             <img src="https://img.icons8.com/material/24/000000/facebook-f.png" alt='facebook logo'/>
             </IconButton>
             </div>
@@ -247,21 +239,26 @@ emailSignIn = (props) => {
 
           </CardBody>
           <CardBody>
-          <Button onClick={() => this.emailSignIn(this.props)} color="info">Login</Button>
+            <Button onClick={() => this.emailSignIn(this.props)} color="info">Login</Button>
           </CardBody>
 
-          <CardBody>
-          <Link to='sign_up'>
-          <div style={{color:'#00BCD4'}}>Sign Up</div>
-          </Link>
-          </CardBody>
+
         </Card>
       </GridItem>
-      <GridItem xs={12} sm={12} md={12}>
 
-      </GridItem>
+
     </GridContainer>
-    </div>
+
+                <Snackbar
+                    place='tc'
+                    color='danger'
+                    icon={AddAlert}
+                    message={errorMessage}
+                    open={open}
+                    closeNotification={() => this.setState({open:false})}
+                    close
+                />
+              
     </center>
 
     </div>
